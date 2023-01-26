@@ -4,7 +4,14 @@ import '../models/product_model.dart';
 
 class ProductController extends GetxController{
   List<Product> productData = [];
-  fetchProductData(){
+  List<Product> cartItem = List<Product>.empty().obs;
+  addtoCart(Product item){
+    cartItem.add(item);
+  }
+  double get totalPrice => cartItem.fold(0, (sum, item)=>sum+item.price);
+  int get count => cartItem.length;
+  fetchProductData()async {
+    Future.delayed(Duration(seconds: 5));
     List<Product> serverResponse = [
       Product(id: 1,
           productName: "productName 1",
@@ -22,7 +29,17 @@ class ProductController extends GetxController{
       ),
     ];
     productData.assignAll(serverResponse);
+    update();
+  }
+  addtoFavourites(id){
+    var index = productData.indexWhere((element) => element.id == id);
+    productData[index].favourite = !productData[index].favourite;
+    update();
   }
 
-
+  @override
+  void onInit() {
+    super.onInit();
+    fetchProductData();
+  }
 }
