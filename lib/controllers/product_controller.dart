@@ -29,12 +29,13 @@ class ProductController extends GetxController{
       ),
     ];
     productData.assignAll(serverResponse);
-    update();
+
   }
   addtoFavourites(id){
     var index = productData.indexWhere((element) => element.id == id);
     productData[index].favourite = !productData[index].favourite;
     update();
+
   }
 
   @override

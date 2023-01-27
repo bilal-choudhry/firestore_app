@@ -20,9 +20,8 @@ class HomePageScreen extends StatelessWidget {
           ElevatedButton.icon(
               onPressed: () {},
               icon: Icon(Icons.add_shopping_cart_outlined),
-              label: GetBuilder<ProductController>(builder: (controller) {
-                return Text(controller.count.toString());
-              })),
+              label:  Obx(()=>Text(controller.count.toString())),
+              ),
         ],
       ),
       body: Column(
@@ -108,10 +107,9 @@ class HomePageScreen extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          GetBuilder<ProductController>(builder: (controller) {
-            return Text("Total Amount : ${controller.totalPrice}",
-              style: TextStyle(fontSize: 20, color: Colors.white),);
-          }),
+           Obx(()=>Text("Total Amount : ${controller.totalPrice}",
+             style: TextStyle(fontSize: 20, color: Colors.white),))
+          ,
           SizedBox(height: 20,)],
 
       ),
